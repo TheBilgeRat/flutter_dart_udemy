@@ -11,13 +11,6 @@ void main(List<String> arguments) {
     ...
   */
 
-  var country = 'Mozambique'; // string
-  var number = 12;
-  var doubleNum = 12.45;
-  var negNum = -14;
-  print(number);
-  print(doubleNum);
-  print(negNum);
   print('Hello World!');
   print(country);
 }
