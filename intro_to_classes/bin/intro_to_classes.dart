@@ -1,37 +1,77 @@
-class Microphone {
-  String name;
-  String color;
-  int model;
+abstract class Animal {
+  void breathe();
 
-  Microphone(this.name, this.color, this.model);
-
-  Microphone.initialize() {
-    name = 'Blue Yeti';
-    model = 9823;
+  void makeNoise() {
+    print('Make Animal Noises!');
   }
-
-  String turnOn() => '$name is on!';
-  String turnOff() => '$name is off!';
 }
 
-class Person {
-  String name, lastName, nationality;
-  int age;
+abstract class IsFunny {
+  void makePeopleLaugh();
+}
+
+class Comedian extends Person implements IsFunny {
+  Comedian(String name, String nationality) : super(name, nationality);
+
+  @override
+  void makePeopleLaugh() {
+    print('Comedian makes people laugh!');
+  }
+}
+
+class TVShow implements IsFunny {
+  String name;
+  @override
+  void makePeopleLaugh() {
+    print('TV show making people laugh');
+  }
+}
+
+class Person implements Animal {
+  String name, nationality;
+
+  Person(this.name, this.nationality);
 
   String showName() => name;
+
+  @override
+  String toString() => '$name $nationality';
+
+  @override
+  void breathe() {
+    print('Person beathes through nose');
+  }
+
+  @override
+  void makeNoise() {
+    print('Person shouting');
+  }
 }
 
 class Bonnie extends Person {
   String profession;
 
+  Bonnie(String name, String nationality) : super(name, nationality);
+
   String showProfession() => profession;
 }
 
+class Location {
+  num lat, lng;
+
+  Location(this.lat, this.lng);
+  Location.create(this.lat, this.lng);
+}
+
+class ElevatedLocation extends Location {
+  num elevation;
+  ElevatedLocation(num lat, num lng, this.elevation) : super(lat, lng);
+
+  @override
+  String toString() => '$lat $lng $elevation';
+}
+
 void main(List<String> arguments) {
-  var bonnie = Bonnie();
-  bonnie.name = 'Bonnie';
-  bonnie.age = 43;
-  bonnie.profession = 'Programmer';
-  print(bonnie.showProfession());
-  print(bonnie.showName());
+  var jenny = Person('Jennie', 'Finnish');
+  print(jenny);
 }
