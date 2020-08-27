@@ -27,12 +27,30 @@ class _BillSplitterState extends State<BillSplitter> {
               width: 150,
               height: 150,
               decoration: BoxDecoration(
-                  color: Colors.blueAccent.shade200,
+                  color: _purple.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12.0)),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text('Total Per Person'), Text('\$450')],
+                  children: [
+                    Text(
+                      'Total Per Person',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15.0,
+                          color: _purple),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        '\$450',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                            color: _purple),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -85,10 +103,86 @@ class _BillSplitterState extends State<BillSplitter> {
                                 margin: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(7.0),
-                                    color: _purple.withOpacity(0.1))),
+                                    color: _purple.withOpacity(0.1)),
+                                child: Center(
+                                  child: Text('-',
+                                      style: TextStyle(
+                                        color: _purple,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17.0,
+                                      )),
+                                )),
+                          ),
+                          Text('$_personCount',
+                              style: TextStyle(
+                                color: _purple,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17.0,
+                              )),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _personCount++;
+                              });
+                            },
+                            child: Container(
+                                width: 40,
+                                height: 40,
+                                margin: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7.0),
+                                    color: _purple.withOpacity(0.1)),
+                                child: Center(
+                                  child: Text('+',
+                                      style: TextStyle(
+                                        color: _purple,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17.0,
+                                      )),
+                                )),
                           ),
                         ],
                       )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Tip',
+                        style: TextStyle(color: Colors.grey.shade700),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text(
+                          '\$45',
+                          style: TextStyle(
+                              color: _purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17.0),
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('$_tipPercent %',
+                          style: TextStyle(
+                              color: _purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17.0)),
+                      Slider(
+                          min: 0,
+                          max: 100,
+                          activeColor: _purple,
+                          inactiveColor: Colors.grey,
+                          divisions: 10,
+                          value: _tipPercent.toDouble(),
+                          onChanged: (double val) {
+                            setState(() {
+                              _tipPercent = val.round();
+                            });
+                          })
                     ],
                   )
                 ],
