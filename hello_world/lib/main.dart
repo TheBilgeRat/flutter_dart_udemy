@@ -5,5 +5,7 @@ import 'package:hello_world/ui/home.dart';
 
 void main() => runApp(MaterialApp(
       //home: ScaffoldExample(),
-      home: BizCard(),
+      //home: BizCard(),
+      //home: Wisdom(),
+      home: BillSplitter(),
     ));

@@ -1,4 +1,180 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/util/hexcolor.dart';
+
+class BillSplitter extends StatefulWidget {
+  @override
+  _BillSplitterState createState() => _BillSplitterState();
+}
+
+class _BillSplitterState extends State<BillSplitter> {
+  int _tipPercent = 0;
+  int _personCount = 1;
+  double _billAmount = 0.0;
+  Color _purple = HexColor("#6908D6");
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+        alignment: Alignment.center,
+        color: Colors.white,
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          padding: EdgeInsets.all(20.5),
+          children: [
+            Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                  color: Colors.blueAccent.shade200,
+                  borderRadius: BorderRadius.circular(12.0)),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text('Total Per Person'), Text('\$450')],
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 20.0),
+              padding: EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(
+                      color: Colors.blueGrey.shade100,
+                      style: BorderStyle.solid),
+                  borderRadius: BorderRadius.circular(12.0)),
+              child: Column(
+                children: [
+                  TextField(
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    style: TextStyle(color: _purple),
+                    decoration: InputDecoration(
+                        prefixText: 'Bill Amount: ',
+                        prefixIcon: Icon(Icons.attach_money)),
+                    onChanged: (String value) {
+                      try {
+                        _billAmount = double.parse(value);
+                      } catch (exception) {
+                        _billAmount = 0.0;
+                      }
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Split',
+                        style: TextStyle(color: Colors.grey.shade700),
+                      ),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                if (_personCount > 1) {
+                                  _personCount--;
+                                }
+                              });
+                            },
+                            child: Container(
+                                width: 40,
+                                height: 40,
+                                margin: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7.0),
+                                    color: _purple.withOpacity(0.1))),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Wisdom extends StatefulWidget {
+  @override
+  _WisdomState createState() => _WisdomState();
+}
+
+class _WisdomState extends State<Wisdom> {
+  int _index = 0;
+  List quotes = [
+    "Life isn’t about getting and having, it’s about giving and being.",
+    "Whatever the mind of man can conceive and believe, it can achieve.",
+    "Strive not to be a success, but rather to be of value.",
+    "You miss 100% of the shots you don’t take.",
+    "I’ve missed more than 9000 shots in my career. I’ve lost almost 300 games. "
+        "26 times I’ve been trusted to take the game winning shot and missed."
+        " I’ve failed over and over and over again in my life. "
+        "And that is why I succeed.",
+    "The most difficult thing is the decision to act, the rest is merely tenacity.",
+    "Every strike brings me closer to the next home run.",
+    "Definiteness of purpose is the starting point of all achievement.",
+    "We become what we think about.",
+    "Life is 10% what happens to me and 90% of how I react to it.",
+    "Your time is limited, so don’t waste it living someone else’s life."
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Center(
+                child: Container(
+                    width: 350,
+                    height: 200,
+                    margin: EdgeInsets.all(30.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(14.5)),
+                    child: Center(
+                        child: Text(
+                      quotes[_index % quotes.length],
+                      style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 24),
+                    ))),
+              ),
+            ),
+            Divider(thickness: 1.3),
+            Padding(
+              padding: const EdgeInsets.only(top: 18.0),
+              child: FlatButton.icon(
+                  onPressed: _showQuote,
+                  color: Colors.lightBlue.shade400,
+                  icon: Icon(Icons.wb_sunny),
+                  label: Text(
+                    'Get Wise',
+                    style: TextStyle(color: Colors.white70),
+                  )),
+            ),
+            Spacer()
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showQuote() {
+    setState(() {
+      _index++;
+    });
+  }
+}
 
 class BizCard extends StatelessWidget {
   @override
