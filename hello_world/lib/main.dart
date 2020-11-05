@@ -7,5 +7,5 @@ void main() => runApp(MaterialApp(
       //home: ScaffoldExample(),
       //home: BizCard(),
       //home: Wisdom(),
-      home: BillSplitter(),
+      home: QuizApp(),
     ));
